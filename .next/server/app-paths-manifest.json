@@ -1,0 +1,5 @@
+{
+  "/api/steam-avatar/route": "app/api/steam-avatar/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js"
+}
