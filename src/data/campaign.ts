@@ -7,8 +7,8 @@ export const campaignData: CampaignData = {
   contributionPerPerson: 36.00,
   durationMonths: 12,
   status: "in_progress",
-  pixKey: "INSIRA_SUA_CHAVE_PIX_AQUI",
-  pixKeyType: "Chave Aleatória / E-mail / Telefone",
+  pixKey: "653f4da0-7755-4ad9-9546-6932d8197f64",
+  pixKeyType: "Chave Aleatória (EVP)",
   adminContactLink: "#",
   adminContactLabel: "Enviar comprovante ao Administrador",
   participants: [

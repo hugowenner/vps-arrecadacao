@@ -33,8 +33,6 @@ export function PixModal({
     setTimeout(() => setCopied(false), 3000);
   };
 
-  const isPlaceholderKey = pixKey === "INSIRA_SUA_CHAVE_PIX_AQUI";
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
@@ -61,10 +59,10 @@ export function PixModal({
           </div>
           <div>
             <h2 className="text-lg font-bold text-white sm:text-xl">
-              Pagamento via PIX
+              Pagamento PIX
             </h2>
             <p className="text-xs text-gray-400">
-              Contribuição de cota individual para VPS
+              Cota individual para infraestrutura do CS Stats
             </p>
           </div>
         </div>
@@ -72,54 +70,37 @@ export function PixModal({
         {/* Contribution Amount Highlight */}
         <div className="mt-5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-center">
           <span className="text-xs uppercase font-bold text-emerald-400 tracking-wider">
-            Valor da sua cota
+            Cota Individual
           </span>
           <div className="text-3xl font-black text-white mt-0.5">
             {formatCurrency(contributionAmount)}
           </div>
           <p className="text-[11px] text-emerald-300/80 mt-1">
-            Contribuição única por jogador (12 meses de servidor)
+            Contribuição única por jogador (12 meses de VPS)
           </p>
         </div>
 
-        {/* QR Code Placeholder Box */}
-        <div className="mt-5 flex flex-col items-center justify-center rounded-xl border border-white/10 bg-black/40 p-6 text-center">
-          <div className="relative flex h-44 w-44 items-center justify-center rounded-lg border border-dashed border-violet-500/40 bg-violet-950/20 p-2">
-            {/* Visual SVG QR Representation */}
-            <div className="grid grid-cols-4 gap-2 opacity-80">
-              <div className="h-8 w-8 bg-cyan-400/70 rounded" />
-              <div className="h-8 w-8 bg-violet-400/70 rounded" />
-              <div className="h-8 w-8 bg-white/70 rounded" />
-              <div className="h-8 w-8 bg-cyan-400/70 rounded" />
-              <div className="h-8 w-8 bg-white/70 rounded" />
-              <div className="h-8 w-8 bg-violet-400/70 rounded" />
-              <div className="h-8 w-8 bg-cyan-400/70 rounded" />
-              <div className="h-8 w-8 bg-white/70 rounded" />
-            </div>
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 backdrop-blur-[2px] rounded-lg p-3">
-              <QrCode className="h-8 w-8 text-cyan-400 mb-1" />
-              <span className="text-[10px] font-bold text-gray-300 uppercase tracking-wide">
-                QR Code PIX
-              </span>
-              {isPlaceholderKey && (
-                <span className="mt-1 text-[9px] text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
-                  Placeholder
-                </span>
-              )}
-            </div>
+        {/* Official QR Code Display Container */}
+        <div className="mt-5 flex flex-col items-center justify-center rounded-xl border border-white/10 bg-black/40 p-5 text-center">
+          <div className="relative flex h-52 w-52 items-center justify-center rounded-2xl bg-white p-3 shadow-xl border-4 border-violet-500/30">
+            <img
+              src="/qrcode.png"
+              alt="QR Code PIX para pagamento da cota"
+              className="h-full w-full object-contain rounded-lg"
+            />
           </div>
-          <p className="mt-3 text-xs text-gray-400">
-            Escaneie pelo aplicativo do seu banco ou copie a chave abaixo
+          <p className="mt-3 text-xs text-gray-300 font-medium">
+            Escaneie o QR Code acima pelo aplicativo do seu banco
           </p>
         </div>
 
         {/* Copy PIX Key Container */}
         <div className="mt-5">
           <label className="block text-xs font-semibold text-gray-300 mb-1.5">
-            Chave PIX ({pixKeyType})
+            Chave PIX ({pixKeyType}):
           </label>
           <div className="flex items-center gap-2">
-            <div className="relative flex-1 overflow-hidden rounded-xl border border-white/10 bg-black/50 px-3.5 py-2.5 font-mono text-xs text-gray-200 truncate">
+            <div className="relative flex-1 overflow-hidden rounded-xl border border-white/10 bg-black/60 px-3.5 py-2.5 font-mono text-xs text-cyan-300 font-bold select-all truncate">
               {pixKey}
             </div>
             <button
@@ -127,25 +108,25 @@ export function PixModal({
               className={`flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-bold text-white transition-all ${
                 copied
                   ? "bg-emerald-600 text-white"
-                  : "bg-violet-600 hover:bg-violet-500 active:scale-95"
+                  : "bg-violet-600 hover:bg-violet-500 active:scale-95 shadow-md shadow-violet-900/40"
               }`}
             >
               {copied ? (
                 <>
                   <Check className="h-4 w-4" />
-                  <span>Copiado!</span>
+                  <span>Chave PIX copiada!</span>
                 </>
               ) : (
                 <>
                   <Copy className="h-4 w-4" />
-                  <span>Copiar</span>
+                  <span>Copiar chave PIX</span>
                 </>
               )}
             </button>
           </div>
           {copied && (
-            <p className="mt-1.5 text-xs text-emerald-400 font-medium flex items-center gap-1">
-              <Check className="h-3.5 w-3.5" /> Chave PIX copiada para a área de transferência!
+            <p className="mt-1.5 text-xs text-emerald-400 font-bold flex items-center gap-1">
+              <Check className="h-3.5 w-3.5" /> Chave PIX copiada! Cole no aplicativo do seu banco.
             </p>
           )}
         </div>
@@ -157,10 +138,10 @@ export function PixModal({
             Como realizar o pagamento:
           </h3>
           <ol className="text-xs text-gray-300 space-y-1.5 pl-4 list-decimal marker:text-violet-400">
-            <li>Abra o app do seu banco e selecione a opção <strong>PIX</strong>.</li>
-            <li>Escolha <strong>PIX Copia e Cola</strong> e cole a chave copiada acima.</li>
+            <li>Abra o app do seu banco e acesse o menu <strong>PIX</strong>.</li>
+            <li>Escolha a opção <strong>PIX Copia e Cola</strong> ou escaneie o QR Code.</li>
             <li>Confirme o valor exato de <strong>{formatCurrency(contributionAmount)}</strong>.</li>
-            <li>Após concluir a transferência, salve o <strong>comprovante</strong>.</li>
+            <li>Conclua a transferência e salve o <strong>comprovante</strong>.</li>
           </ol>
         </div>
 
@@ -169,11 +150,11 @@ export function PixModal({
           <div className="flex items-start gap-2">
             <ShieldAlert className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
             <div>
-              <p className="font-semibold text-amber-300">
-                Aviso de confirmação manual:
+              <p className="font-bold text-amber-300">
+                Envie o comprovante após realizar o pagamento.
               </p>
               <p className="mt-0.5 text-amber-200/90 text-[11px]">
-                Envie o comprovante para o administrador para que o seu status seja atualizado para <span className="font-bold text-emerald-400">🟢 Pago</span>.
+                Após a transferência, envie o comprovante ao administrador para confirmar sua cota como <span className="font-bold text-emerald-400">🟢 Pago</span>.
               </p>
             </div>
           </div>
@@ -196,7 +177,7 @@ export function PixModal({
                 className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs font-medium text-gray-400 cursor-not-allowed border border-white/5"
               >
                 <Send className="h-3.5 w-3.5" />
-                <span>{adminContactLabel} (Placeholder)</span>
+                <span>{adminContactLabel}</span>
               </button>
             )}
           </div>
