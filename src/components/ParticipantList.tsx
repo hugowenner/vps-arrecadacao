@@ -69,20 +69,18 @@ export function ParticipantList({ participants, contributionAmount }: Participan
   });
 
   return (
-    <section className="py-6 sm:py-8">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="py-4 sm:py-8">
+      <div className="mx-auto max-w-6xl px-3 xs:px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-600/20 text-violet-400 border border-violet-500/30">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-violet-600/20 text-violet-400 border border-violet-500/30">
               <Users className="h-5 w-5" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-lg font-bold text-white sm:text-xl">
-                  Participantes ({participants.length})
-                </h3>
-              </div>
+              <h3 className="text-base xs:text-lg sm:text-xl font-bold text-white">
+                Participantes ({participants.length})
+              </h3>
               {/* Frase sutil de humor da comunidade */}
               <p className="text-xs text-violet-300/90 italic font-medium mt-0.5">
                 "Agora é só cada um fazer a sua parte. Sim, isso inclui você."
@@ -90,43 +88,45 @@ export function ParticipantList({ participants, contributionAmount }: Participan
             </div>
           </div>
 
-          {/* Filter Tabs */}
-          <div className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-black/40 p-1 text-xs">
-            <button
-              onClick={() => setActiveTab("all")}
-              className={`rounded-lg px-3 py-1.5 font-bold transition-all ${
-                activeTab === "all"
-                  ? "bg-violet-600 text-white shadow-md"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Todos ({participants.length})
-            </button>
-            <button
-              onClick={() => setActiveTab("paid")}
-              className={`rounded-lg px-3 py-1.5 font-bold transition-all ${
-                activeTab === "paid"
-                  ? "bg-emerald-600 text-white shadow-md"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Pagos ({paidCount})
-            </button>
-            <button
-              onClick={() => setActiveTab("pending")}
-              className={`rounded-lg px-3 py-1.5 font-bold transition-all ${
-                activeTab === "pending"
-                  ? "bg-amber-600 text-white shadow-md"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Aguardando ({pendingCount})
-            </button>
+          {/* Filter Tabs — Scrollable horizontal container for mobile touch accessibility */}
+          <div className="w-full sm:w-auto overflow-x-auto no-scrollbar pt-1 sm:pt-0">
+            <div className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-black/40 p-1 text-xs min-w-max">
+              <button
+                onClick={() => setActiveTab("all")}
+                className={`min-h-[40px] rounded-lg px-3 py-2 font-bold transition-all ${
+                  activeTab === "all"
+                    ? "bg-violet-600 text-white shadow-md"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                Todos ({participants.length})
+              </button>
+              <button
+                onClick={() => setActiveTab("paid")}
+                className={`min-h-[40px] rounded-lg px-3 py-2 font-bold transition-all ${
+                  activeTab === "paid"
+                    ? "bg-emerald-600 text-white shadow-md"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                Pagos ({paidCount})
+              </button>
+              <button
+                onClick={() => setActiveTab("pending")}
+                className={`min-h-[40px] rounded-lg px-3 py-2 font-bold transition-all ${
+                  activeTab === "pending"
+                    ? "bg-amber-600 text-white shadow-md"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                Aguardando ({pendingCount})
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Participant Cards Grid */}
-        <div className="mt-6 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-5 sm:mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {filteredParticipants.map((participant) => (
             <ParticipantCard
               key={participant.id}
@@ -138,7 +138,7 @@ export function ParticipantList({ participants, contributionAmount }: Participan
         </div>
 
         {filteredParticipants.length === 0 && (
-          <div className="mt-8 rounded-2xl border border-dashed border-white/10 p-8 text-center text-gray-400">
+          <div className="mt-6 sm:mt-8 rounded-2xl border border-dashed border-white/10 p-6 sm:p-8 text-center text-gray-400">
             <Filter className="mx-auto h-8 w-8 text-gray-500 mb-2" />
             <p className="text-sm font-semibold">Nenhum participante encontrado nesta categoria.</p>
           </div>
