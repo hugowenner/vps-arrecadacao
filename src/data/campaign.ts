@@ -13,7 +13,7 @@ export const campaignData: CampaignData = {
   adminContactLabel: "Enviar comprovante ao Administrador",
   participants: [
     { id: "1", name: "Bago Direito", paid: false },
-    { id: "2", name: "Crals", paid: false },
+    { id: "2", name: "Hupe", paid: true },
     { id: "3", name: "Flp", paid: true, steamId: "76561198000000000" },
     { id: "4", name: "GentulioNargas", paid: true },
     { id: "5", name: "LorD", paid: true, steamId: "76561198012345678" },
